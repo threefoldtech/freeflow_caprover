@@ -1,0 +1,4 @@
+exec: /usr/sbin/sshd -D
+# test: ps aux | grep "[s]shd"
+after:
+  - sshd-init

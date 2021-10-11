@@ -1,0 +1,4 @@
+exec: /scripts/caprover.sh
+after:
+  - dockerd
+oneshot: true
