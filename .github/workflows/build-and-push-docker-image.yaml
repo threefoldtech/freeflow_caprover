@@ -36,7 +36,8 @@ jobs:
       - 
         name: Docker Export 
         run: |
-          docker save tf-caprover-${{ steps.versions.outputs.branch }}-${{ steps.versions.outputs.commit }}:latest | gzip > tf-caprover-${{ steps.versions.outputs.branch }}-${{ steps.versions.outputs.commit }}.tar.gz
+          docker run --name tf-caprover --entrypoint /bin/true tf-caprover-${{ steps.versions.outputs.branch }}-${{ steps.versions.outputs.commit }}:latest
+          docker export tf-caprover | gzip > tf-caprover-${{ steps.versions.outputs.branch }}-${{ steps.versions.outputs.commit }}.tar.gz
       -
         name: Flist Upload
         run: |
