@@ -11,7 +11,7 @@ if [[ ! -z "${CAPROVER_ROOT_DOMAIN}" ]]; then
 
 fi
 
-while ! docker run -p 80:80 -p 443:443 -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain caprover/caprover:1.10.1; do
+while ! docker run -p 80:80 -p 443:443 -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain abom/caprover-captain:latest; do
     sleep 2
 done
 
