@@ -9,7 +9,7 @@ terraform {
 
 provider "grid" {
     twin_id = 29
-    mnemonics = "" 
+    mnemonics = ""
 }
 
 resource "grid_network" "net0" {
@@ -38,7 +38,7 @@ resource "grid_deployment" "d0" {
 
   vms {
     name = "caprover"
-    flist = "https://hub.grid.tf/samehabouelsaad.3bot/abouelsaad-caprover-tf_10.0.1_v1.0.flist"
+    flist = "https://hub.grid.tf/samehabouelsaad.3bot/tf-caprover-main-a4f186da8d.flist"
     # modify the cores according to your needs
     cpu = 4
     publicip = true
