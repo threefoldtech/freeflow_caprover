@@ -2,13 +2,11 @@ terraform {
   required_providers {
     grid = {
       source = "threefoldtech/grid"
-      version = "0.1.9"
     }
   }
 }
 
 provider "grid" {
-    twin_id = 29
     mnemonics = ""
 }
 
