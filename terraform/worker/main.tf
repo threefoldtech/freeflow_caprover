@@ -30,7 +30,7 @@ resource "grid_deployment" "d2" {
 
   vms {
     name = "caprover"
-    flist = "https://hub.grid.tf/samehabouelsaad.3bot/abouelsaad-caprover-tf_10.0.1_v1.0.flist"
+    flist = "https://hub.grid.tf/tf-official-apps/tf-caprover-main.flist"
     # modify the cores according to your needs
     cpu = 2
     publicip = true
