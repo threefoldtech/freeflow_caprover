@@ -50,5 +50,5 @@ jobs:
         with:
           threefold: ${{ secrets.HUB_TOKEN }}
           action: symlink
-          name: tf-caprover-main.flist
-          target: tf-caprover-${{ steps.versions.outputs.branch }}-${{ steps.versions.outputs.commit }}.flist
+          name: tf-caprover-${{ steps.versions.outputs.branch }}-${{ steps.versions.outputs.commit }}.flist
+          target: tf-caprover-main.flist
