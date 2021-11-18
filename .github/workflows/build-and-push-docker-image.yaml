@@ -42,3 +42,13 @@ jobs:
         name: Flist Upload
         run: |
           curl -H "Authorization: bearer ${{ secrets.HUB_TOKEN }}" -F file=@tf-caprover-${{ steps.versions.outputs.branch }}-${{ steps.versions.outputs.commit }}.tar.gz https://hub.grid.tf/api/flist/me/upload
+      
+      -
+        name: Symlink flist
+        if: success() && github.ref == 'refs/heads/main'
+        uses: threefoldtech/publish-flist@master
+        with:
+          threefold: ${{ secrets.HUB_TOKEN }}
+          action: symlink
+          name: tf-caprover-main.flist
+          target: tf-caprover-${{ steps.versions.outputs.branch }}-${{ steps.versions.outputs.commit }}.flist
