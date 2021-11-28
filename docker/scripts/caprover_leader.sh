@@ -19,7 +19,7 @@ if [[ ! -z "${CAPROVER_ROOT_DOMAIN}" ]]; then
 fi
 
 [ -z "$DEFAULT_PASSWORD" ] && DEFAULT_PASSWORD="captain42"
-while ! docker run -e DEFAULT_PASSWORD='${DEFAULT_PASSWORD}' -p 80:80 -p 443:443 -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain $CAPTAIN_IMAGE:$CAPTAIN_IMAGE_VERSION; do
+while ! docker run -e DEFAULT_PASSWORD="$DEFAULT_PASSWORD" -p 80:80 -p 443:443 -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain $CAPTAIN_IMAGE:$CAPTAIN_IMAGE_VERSION; do
     sleep 2
 done
 
