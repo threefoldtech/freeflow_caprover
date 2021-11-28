@@ -47,22 +47,25 @@ git clone https://github.com/freeflowuniverse/freeflow_caprover.git
 
   ```bash
   cd freeflow_caprover/terraform/leader/
+  export MNEMONICS="<mnemonics words>"
+  export NETWORK="<network>" # dev or test
   vim main.tf
   ```
 
-  - In `provider` Block, update the `twin_id` and add your `mnemonics`.
   - In `resource` Block, update the disks size, memory size, and cores number to fit your needs or leave as it is for testing.
   - In the `PUBLIC_KEY` env var value put your ssh public key .
   - In the `CAPROVER_ROOT_DOMAIN` env var value put your root domain, this is optional and you can add it later from the dashboard put it will save you the extra step and allow you to access your dashboard using your domain name directly after the deployment.
+  - In the `DEFAULT_PASSWORD` env var value put a password to be used for login to captain dashboard or leave it as it is to generate random password.
 
 - save the file, and execute the following commands:
 
   ```bash
-  terraform init
-  terraform apply -parallelism=1
+  terraform init && terraform apply -parallelism=1
   ```
 
 - wait till you see `apply complete`, and note the VM public ip in the final output.
+
+- not the tf output of `caprover_default_password`. you will need this password to login to the captain dashboard later.
 
 - verify the status of the VM
 
@@ -217,7 +220,7 @@ To confirm, go to https://mxtoolbox.com/DNSLookup.aspx and enter `somethingrando
 
 skip this step if you provided your root domain in the TerraFrom configuration file
 
-Once the CapRover is initialized, you can visit `http://[IP_OF_YOUR_SERVER]:3000` in your browser and login to CapRover using the default password `captain42`. You can change your password later.
+Once the CapRover is initialized, you can visit `http://[IP_OF_YOUR_SERVER]:3000` in your browser and login to CapRover using the password from tf output noted in previous step. also you can change your password later.
 
 In the UI enter you root domain and press Update Domain button.
 
