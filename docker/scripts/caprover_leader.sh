@@ -1,5 +1,5 @@
-CAPTAIN_IMAGE=abom/caprover-captain
-CAPTAIN_IMAGE_VERSION=latest
+CAPTAIN_IMAGE=${CAPTAIN_IMAGE:-abom/caprover-captain}
+CAPTAIN_IMAGE_VERSION=${CAPTAIN_IMAGE_VERSION:-latest}
 
 if [[ ! -z "${CAPROVER_ROOT_DOMAIN}" ]]; then
     echo "CapRover Root Domain: ${CAPROVER_ROOT_DOMAIN}"
