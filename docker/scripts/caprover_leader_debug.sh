@@ -1,5 +1,5 @@
-CAPTAIN_IMAGE=${CAPTAIN_IMAGE:-abom/caprover-captain}
-CAPTAIN_IMAGE_VERSION=${CAPTAIN_IMAGE_VERSION:-latest}
+CAPTAIN_IMAGE=${CAPTAIN_IMAGE:-rawdgastan/caprover}
+CAPTAIN_IMAGE_VERSION=${CAPTAIN_IMAGE_VERSION:-captain-debug}
 
 if [[ ! -z "${CAPROVER_ROOT_DOMAIN}" ]]; then
     echo "CapRover Root Domain: ${CAPROVER_ROOT_DOMAIN}"
@@ -18,10 +18,26 @@ if [[ ! -z "${CAPROVER_ROOT_DOMAIN}" ]]; then
 
 fi
 
+if ! [ $(id -u) = 0 ]; then
+   echo "Must run as sudo or root"
+   exit 1
+fi
+
+pwd > currentdirectory
+rm -rf /captain && mkdir /captain
+chmod -R 777 /captain
+
 [ -z "$DEFAULT_PASSWORD" ] && DEFAULT_PASSWORD="captain42"
-while ! docker run -e DEFAULT_PASSWORD="$DEFAULT_PASSWORD" -p 80:80 -p 443:443 -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain $CAPTAIN_IMAGE:$CAPTAIN_IMAGE_VERSION; do
+while ! docker run \
+   -e "CAPTAIN_IS_DEBUG=1" \
+   -e "MAIN_NODE_IP_ADDRESS=127.0.0.1" \
+   -v /var/run/docker.sock:/var/run/docker.sock \
+   -v /captain:/captain \
+   -v $(pwd):/usr/src/app $CAPTAIN_IMAGE:$CAPTAIN_IMAGE_VERSION; do
     sleep 2
 done
+
+docker service logs captain-captain --follow
 
 echo "==================================="
 echo " **** Installation is done! *****  "
