@@ -23,11 +23,10 @@ fi
 #fi
 
 pwd > currentdirectory
-docker build -t captain-debug -f dockerfile-captain.debug .
 
 
 [ -z "$DEFAULT_PASSWORD" ] && DEFAULT_PASSWORD="captain42"
-while ! docker run -e DEFAULT_PASSWORD="$DEFAULT_PASSWORD" -e CAPTAIN_IS_DEBUG="$CAPTAIN_IS_DEBUG" -p 80:80 -p 443:443 -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain -v $(pwd):/usr/src/app captain-debug $CAPTAIN_IMAGE:$CAPTAIN_IMAGE_VERSION; do
+while ! docker run -e DEFAULT_PASSWORD="$DEFAULT_PASSWORD" -e CAPTAIN_IS_DEBUG="$CAPTAIN_IS_DEBUG" -p 80:80 -p 443:443 -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain -v $(pwd):/usr/src/app $CAPTAIN_IMAGE:$CAPTAIN_IMAGE_VERSION; do
     sleep 2
 done
 
