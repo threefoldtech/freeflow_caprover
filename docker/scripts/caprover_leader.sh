@@ -18,6 +18,8 @@ if [[ ! -z "${CAPROVER_ROOT_DOMAIN}" ]]; then
 
 fi
 
+pwd > currentdirectory
+
 if [ -z $CAPTAIN_IS_DEBUG ]; then 
 pwd > currentdirectory
 fi
