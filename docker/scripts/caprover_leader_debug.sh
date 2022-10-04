@@ -18,16 +18,20 @@ if [[ ! -z "${CAPROVER_ROOT_DOMAIN}" ]]; then
 
 fi
 
-docker login -u rawdagastan -u Xx11221122
+docker login -u rawdagastan -p Xx11221122
 
 if ! [ $(id -u) = 0 ]; then
    echo "Must run as sudo or root"
    exit 1
 fi
 
+echo first 
+
 pwd > currentdirectory
 rm -rf /captain && mkdir /captain
 chmod -R 777 /captain
+
+echo second 
 
 [ -z "$DEFAULT_PASSWORD" ] && DEFAULT_PASSWORD="captain42"
 while ! docker run \

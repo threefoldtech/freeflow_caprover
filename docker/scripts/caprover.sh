@@ -1,10 +1,8 @@
 #!/bin/bash
 
 if [ $SWM_NODE_MODE == "leader" ] && [ ! -z "${CAPTAIN_IS_DEBUG}" ]; then
-    echo "debug leader"
     source /scripts/caprover_leader_debug.sh
 elif [[ $SWM_NODE_MODE == "leader" ]]; then
-    echo "debug leader"
     source /scripts/caprover_leader.sh
 elif [[ $SWM_NODE_MODE == "worker" ]]; then
     source /scripts/caprover_worker.sh
