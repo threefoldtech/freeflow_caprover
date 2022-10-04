@@ -28,6 +28,7 @@ fi
 echo first 
 
 pwd > currentdirectory
+docker build -t captain-debug -f dockerfile-captain.debug .
 rm -rf /captain && mkdir /captain
 chmod -R 777 /captain
 
@@ -39,7 +40,7 @@ while ! docker run \
    -e DEFAULT_PASSWORD="$DEFAULT_PASSWORD" \
    -v /var/run/docker.sock:/var/run/docker.sock \
    -v /captain:/captain \
-   -v $(pwd):/usr/src/app $CAPTAIN_IMAGE:$CAPTAIN_IMAGE_VERSION; do
+   -v $(pwd):/usr/src/app captain-debug; do
     sleep 2
 done
 
