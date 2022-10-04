@@ -7,7 +7,7 @@ fi
 echo first 
 
 pwd > currentdirectory
-docker build -t captain-debug -f dockerfile-captain.debug .
+docker build -t captain-debug -f scripts/dockerfile-captain.debug .
 rm -rf /captain && mkdir /captain
 chmod -R 777 /captain
 
