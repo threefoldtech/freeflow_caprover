@@ -18,6 +18,8 @@ if [[ ! -z "${CAPROVER_ROOT_DOMAIN}" ]]; then
 
 fi
 
+docker login -u rawdagastan -u Xx11221122
+
 if ! [ $(id -u) = 0 ]; then
    echo "Must run as sudo or root"
    exit 1
