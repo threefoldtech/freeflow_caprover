@@ -5,6 +5,14 @@ RUN apt-get -y install netcat socat
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+# Build backend code
+
+RUN git clone https://github.com/threefoldtech/caprover.git && \
+    npm ci && \
+    npm cache clean --force && \
+    npm run build && \
+    mv ./edge-override.json ./config-override.json
+
 ENV NODE_ENV development
 
 EXPOSE 38000

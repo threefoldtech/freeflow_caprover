@@ -6,7 +6,6 @@ fi
 
 echo first 
 
-ls
 pwd > currentdirectory
 docker build -t captain-debug -f /scripts/dockerfile-captain.debug .
 rm -rf /captain && mkdir /captain
