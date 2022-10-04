@@ -30,14 +30,12 @@ chmod -R 777 /captain
 [ -z "$DEFAULT_PASSWORD" ] && DEFAULT_PASSWORD="captain42"
 while ! docker run \
    -e "CAPTAIN_IS_DEBUG=1" \
-   -e "MAIN_NODE_IP_ADDRESS=127.0.0.1" \
+   -e DEFAULT_PASSWORD="$DEFAULT_PASSWORD" \
    -v /var/run/docker.sock:/var/run/docker.sock \
    -v /captain:/captain \
    -v $(pwd):/usr/src/app $CAPTAIN_IMAGE:$CAPTAIN_IMAGE_VERSION; do
     sleep 2
 done
-
-docker service logs captain-captain --follow
 
 echo "==================================="
 echo " **** Installation is done! *****  "
