@@ -1,29 +1,17 @@
 
-if ! [ $(id -u) = 0 ]; then
-   echo "Must run as sudo or root"
-   exit 1
-fi
-
-echo first 
-
-docker build -t captain-debug -f scripts/dockerfile-captain.debug .
-rm -rf /captain && mkdir /captain
-chmod -R 777 /captain
-
-echo second 
 
 [ -z "$DEFAULT_PASSWORD" ] && DEFAULT_PASSWORD="captain42"
-while ! docker run \
+docker service rm $(docker service ls -q)
+sleep 1s
+docker secret rm captain-salt
+docker build -t captain-debug -f dockerfile-captain.debug .
+rm -rf /captain && mkdir /captain
+chmod -R 777 /captain
+docker run \
    -e "CAPTAIN_IS_DEBUG=1" \
-   -e DEFAULT_PASSWORD="$DEFAULT_PASSWORD" \
+   -e "MAIN_NODE_IP_ADDRESS=127.0.0.1" \
    -v /var/run/docker.sock:/var/run/docker.sock \
-   -v /captain:/captain captain-debug; do
-    sleep 2
-done
-
-echo "==================================="
-echo " **** Installation is done! *****  "
-[[ ! -z "${CAPROVER_ROOT_DOMAIN}" ]] && echo "CapRover is available at http://captain.${CAPROVER_ROOT_DOMAIN}" || echo "CapRover is available at http://{public-ip-address}:3000"
-echo "Default password is: captain42"
-echo "CapRover CAPTAIN IS DEBUG: ${CAPTAIN_IS_DEBUG}"
-echo "==================================="
+   -v /captain:/captain \
+   captain-debug
+sleep 2s
+docker service logs captain-captain --follow
