@@ -11,8 +11,7 @@ RUN cd /usr/src/app && \
     cd caprover && \
     npm ci && \
     npm cache clean --force && \
-    npm run build && \
-    mv ./edge-override.json ./config-override.json
+    npm run build 
 
 RUN echo /usr/src/app/caprover > /usr/src/app/caprover/currentdirectory 
 

@@ -17,7 +17,8 @@ while ! docker run \
    -e "CAPTAIN_IS_DEBUG=1" \
    -e DEFAULT_PASSWORD="$DEFAULT_PASSWORD" \
    -v /var/run/docker.sock:/var/run/docker.sock \
-   -v /captain:/captain captain-debug; do
+   -v /captain:/captain \
+   -v /usr/src/app/caprover:/usr/src/app captain-debug; do
     sleep 2
 done
 
