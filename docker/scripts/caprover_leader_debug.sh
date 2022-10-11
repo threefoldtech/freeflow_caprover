@@ -6,6 +6,7 @@ if ! [ $(id -u) = 0 ]; then
 fi
 
 pushd /usr/src
+apt-get install -y npm
 [ ! -d /usr/src/caprover ] && git clone https://github.com/caprover/caprover.git --depth=1 /usr/src/caprover 
 cd /usr/src/caprover && npm i && npm run build
 popd
