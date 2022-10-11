@@ -25,13 +25,9 @@ popd
 echo /usr/src/caprover > /usr/src/caprover/currentdirectory
 chmod 777 /usr/src/caprover/currentdirectory
 
-echo first 
-
 cd scripts && docker build -t captain-debug -f /scripts/dockerfile-captain.debug . && cd ..
 rm -rf /captain && mkdir /captain
 chmod -R 777 /captain
-
-echo second 
 
 [ -z "$DEFAULT_PASSWORD" ] && DEFAULT_PASSWORD="captain42"
 while ! docker run \
