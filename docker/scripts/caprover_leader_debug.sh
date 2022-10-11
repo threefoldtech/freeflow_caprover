@@ -1,8 +1,17 @@
+#!/bin/bash
 
 if ! [ $(id -u) = 0 ]; then
    echo "Must run as sudo or root"
    exit 1
 fi
+
+pushd /usr/src
+[ ! -d /usr/src/caprover ] && git clone https://github.com/caprover/caprover.git --depth=1 /usr/src/caprover 
+cd /usr/src/caprover && npm i && npm run build
+popd
+
+echo /usr/src/caprover > /usr/src/caprover/currentdirectory
+chmod 777 /usr/src/caprover/currentdirectory
 
 echo first 
 
@@ -17,9 +26,12 @@ while ! docker run \
    -e "CAPTAIN_IS_DEBUG=1" \
    -e DEFAULT_PASSWORD="$DEFAULT_PASSWORD" \
    -v /var/run/docker.sock:/var/run/docker.sock \
-   -v /captain:/captain captain-debug; do
+   -v /captain:/captain \
+   -v /usr/src/caprover:/usr/src/app captain-debug; do
     sleep 2
 done
+
+docker service logs captain-captain --follow
 
 echo "==================================="
 echo " **** Installation is done! *****  "
