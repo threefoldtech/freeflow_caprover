@@ -13,6 +13,15 @@ apt-get install -y nodejs
 cd /usr/src/caprover && npm i && npm run build
 popd
 
+pushd /usr/src
+curl -Iv https://registry.yarnpkg.com/@ant-design/icons-svg/-/icons-svg-4.1.0.tgz
+[ ! -d /usr/src/caprover_frontend ] && git clone https://github.com/githubsaturn/caprover-frontend.git --depth=1 /usr/src/caprover_frontend 
+cd /usr/src/caprover_frontend 
+yarn install  --no-cache --frozen-lockfile --network-timeout 600000 && echo "Installation finished"
+yarn run build && echo "Building finished"
+mv /usr/src/caprover_frontend/build/ /usr/src/caprover/dist-frontend
+popd
+
 echo /usr/src/caprover > /usr/src/caprover/currentdirectory
 chmod 777 /usr/src/caprover/currentdirectory
 
