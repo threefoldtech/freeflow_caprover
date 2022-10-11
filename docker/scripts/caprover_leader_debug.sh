@@ -27,7 +27,7 @@ chmod 777 /usr/src/caprover/currentdirectory
 
 echo first 
 
-docker build -t captain-debug -f scripts/dockerfile-captain.debug .
+cd scripts && docker build -t captain-debug -f /scripts/dockerfile-captain.debug . && cd ..
 rm -rf /captain && mkdir /captain
 chmod -R 777 /captain
 
